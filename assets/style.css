@@ -5,11 +5,24 @@
 body {
     margin: 0;
     display: flex;
-    justify-content:  center;
+    justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: url(./wellAtleastWeWon.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #weeper {
     border: 5px solid black;
+}
+
+@font-face {
+    font-family: mine-sweeper;
+    src: url(./mine-sweeper.ttf);
+}
+
+@font-face {
+    font-family: hudFont;
+    src: url(./hudfont.ttf);
 }
