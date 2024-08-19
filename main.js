@@ -5,7 +5,9 @@ const cellSize = 50;
 const cellGap = 5;
 const smiley = document.getElementById("smiley:D");
 const angy = document.getElementById("whathaveyoudone");
+const yippee = document.getElementById("yippee");
 const totalMines = 40;
+let wonGame = false;
 let flagsLeft = totalMines;
 let timer = 0;
 let gameOver = false;
@@ -111,7 +113,6 @@ class Mine {
   };
   clickityClack = () => {
     this.visible = true;
-    console.log("test");
     if (this.state === -1) {
       gameOver = true;
       clearInterval(timerInter);
@@ -176,6 +177,8 @@ class Mine {
       ) {
         cells[this.yPos * 16 + this.xPos + 17].clickityClack();
       }
+    } else if (this.state === 1) {
+      checkIfWon();
     }
   };
 }
@@ -226,8 +229,26 @@ weeper.addEventListener("mousedown", (event) => {
   }
 });
 
-function drawGUI(lost) {
+function checkIfWon() {
+  if (
+    cells.filter((elem) => !elem.visible).length == totalMines
+  ) {
+    wonGame = true;
+    console.log("won");
+    clearInterval(timerInter);
+    displayWon();
+  }
+}
+
+function displayWon() {
+  ctx.clearRect(0, 0, 885, 985);
+  drawGUI(false, true);
+  drawGame();
+}
+
+function drawGUI(lost, won) {
   lost = lost || false;
+  won = won || false;
 
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, 8085, 985);
@@ -249,10 +270,12 @@ function drawGUI(lost) {
   );
   ctx.fillStyle = "#F0F0F0";
 
-  if (!lost) {
+  if (!lost && !won) {
     ctx.drawImage(smiley, 10 + 295 + 97.5, 10, 80, 80);
-  } else {
+  } else if (lost) {
     ctx.drawImage(angy, 10 + 295 + 97.5, 10, 80, 80);
+  } else if (won) {
+    ctx.drawImage(yippee, 10 + 295 + 97.5, 10, 80, 80);
   }
 }
 
@@ -350,6 +373,7 @@ function init() {
   flagsLeft = totalMines;
   timer = 0;
   gameOver = false;
+  won = false;
   drawGUI();
   generateMines();
   inititializeMines();
