@@ -6,11 +6,14 @@ const cellGap = 5;
 const smiley = document.getElementById("smiley:D");
 const angy = document.getElementById("whathaveyoudone");
 const yippee = document.getElementById("yippee");
+const WRONG = new Audio("./assets/WRONG.mp3");
+WRONG.volume = 0.1;
 const totalMines = 40;
 let wonGame = false;
 let flagsLeft = totalMines;
 let timer = 0;
 let gameOver = false;
+let doneAnimation = true;
 
 // Lore(yes cuz why not): war happen, we win, you clean lmao
 
@@ -116,6 +119,7 @@ class Mine {
     if (this.state === -1) {
       gameOver = true;
       clearInterval(timerInter);
+      WRONG.play();
       displayGameOver();
     }
     if (this.state === 0) {
@@ -197,8 +201,10 @@ weeper.addEventListener("mousedown", (event) => {
       mouseXPos >= 10 + 295 + 97.5 &&
       mouseXPos <= 10 + 295 + 97.5 + 80 &&
       mouseYPos >= 10 &&
-      mouseYPos <= 90
+      mouseYPos <= 90 &&
+      doneAnimation
     ) {
+      console.log(doneAnimation);
       clearInterval(timerInter);
       init();
     }
@@ -230,9 +236,7 @@ weeper.addEventListener("mousedown", (event) => {
 });
 
 function checkIfWon() {
-  if (
-    cells.filter((elem) => !elem.visible).length == totalMines
-  ) {
+  if (cells.filter((elem) => !elem.visible).length == totalMines) {
     wonGame = true;
     console.log("won");
     clearInterval(timerInter);
@@ -249,6 +253,8 @@ function displayWon() {
 function drawGUI(lost, won) {
   lost = lost || false;
   won = won || false;
+
+  ctx.globalAlpha = 1;
 
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, 8085, 985);
@@ -350,6 +356,7 @@ function inititializeMines() {
 }
 
 function drawGame() {
+  ctx.globalAlpha = 1;
   ctx.fillStyle = "#C0C0C0";
   ctx.fillRect(0, 100, 885, 885);
   ctx.fillStyle = "#F0F0F0";
@@ -362,11 +369,23 @@ function drawGame() {
 
 function displayGameOver() {
   ctx.clearRect(0, 0, 885, 985);
-  drawGUI(true);
-  drawGame();
+  ctx.globalAlpha = 1;
+  doneAnimation = false;
+  for (let amountOfAlpha = 100; amountOfAlpha >= 0; amountOfAlpha -= 0.25) {
+    setTimeout(() => {
+      ctx.globalAlpha = 1;
+      drawGUI(true);
+      drawGame();
+      ctx.globalAlpha = amountOfAlpha / 100;
+      ctx.drawImage(document.getElementById("ERH"), 0, 0, 885, 985);
+    }, 1000 / 60);
+  }
+  doneAnimation = true;
+  ctx.globalAlpha = 1;
 }
 
 function init() {
+  ctx.globalAlpha = 1;
   while (cells.length) {
     cells.pop();
   }
