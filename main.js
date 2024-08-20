@@ -1,20 +1,47 @@
+//declarations
+
 const weeper = document.getElementById("weeper");
 const ctx = weeper.getContext("2d");
 const gameSize = 16;
 const cellSize = 50;
 const cellGap = 5;
-const smiley = document.getElementById("smiley:D");
-const angy = document.getElementById("whathaveyoudone");
-const yippee = document.getElementById("yippee");
-const WRONG = new Audio("./assets/WRONG.mp3");
-WRONG.volume = 0.1;
 const totalMines = 40;
 let wonGame = false;
 let flagsLeft = totalMines;
 let timer = 0;
 let gameOver = false;
 let doneAnimation = true;
+let firstTime = true;
 
+// sprites
+const smiley = document.getElementById("smiley:D");
+const angy = document.getElementById("whathaveyoudone");
+const yippee = document.getElementById("yippee");
+
+const WRONG = new Audio("./assets/WRONG.mp3");
+WRONG.volume = 0.1;
+const beep = new Audio("./assets/WRONG.mp3");
+beep.volume = 0.01
+const vectorye = new Audio("./assets/vectorye.mp3");
+vectorye.volume = 0.25;
+const ost = new Audio("./assets/famoussongplayedbeforedisaster.mp3");
+try {
+  ost.loop = true;
+} catch (error) {
+  try {
+    ost.addEventListener(
+      "ended",
+      function () {
+        console.log("started");
+        this.currentTime = 0;
+        this.play();
+      },
+      false
+    );
+  } catch (error2) {
+    console.log(error2);
+  }
+}
 // Lore(yes cuz why not): war happen, we win, you clean lmao
 
 // // debug stuff
@@ -196,6 +223,11 @@ weeper.addEventListener("mousedown", (event) => {
   let mouseYPos = event.offsetY;
   let x = Math.floor(mouseXPos / (cellSize + cellGap));
   let y = Math.floor((mouseYPos - 100) / (cellSize + cellGap));
+  // why do i have to do this????
+  if (firstTime) {
+    ost.play();
+    firstTime = false;
+  }
   if (x < 0 || x > 15 || y < 0 || y > 15) {
     if (
       mouseXPos >= 10 + 295 + 97.5 &&
@@ -238,7 +270,7 @@ weeper.addEventListener("mousedown", (event) => {
 function checkIfWon() {
   if (cells.filter((elem) => !elem.visible).length == totalMines) {
     wonGame = true;
-    console.log("won");
+    vectorye.play();
     clearInterval(timerInter);
     displayWon();
   }
