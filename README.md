@@ -25,10 +25,10 @@ Detect pipe bombs and remove them from the battlefield so yall can fight again.
 ![bumbastic](https://github.com/sorbTheGoobert/pipe-bomb-detecter/blob/main/assets/capluaeh.png?raw=true)
 this is a capluaeh, it will boom
 ![ERH](https://github.com/sorbTheGoobert/pipe-bomb-detecter/blob/main/assets/ERH.png?raw=true)
-this is a ERH or *loud in correct buzzer*, it just a flag lol
+this is a ERH or *loud incorrect buzzer*, it just a flag lol
 ![smiley](https://github.com/sorbTheGoobert/pipe-bomb-detecter/blob/main/assets/smiley.jpeg?raw=true)
-this is a smiley or easy face, if you see youre alive.
+this is a smiley or easy face, if you see you're alive.
 ![whathaveyoudone](https://github.com/sorbTheGoobert/pipe-bomb-detecter/blob/main/assets/whathaveyoudone.jpg?raw=true)
-this is a whathaveyoudone or demon face, if you see him instead of the blue boy, haha, YOURE DEAD
+this is a whathaveyoudone or demon face, if you see him instead of the blue boy, haha, YOU'RE DEAD
 ![yippee](https://github.com/sorbTheGoobert/pipe-bomb-detecter/blob/main/assets/yippee.jpg?raw=true)
 this is a yippee, if you see him that means you win.

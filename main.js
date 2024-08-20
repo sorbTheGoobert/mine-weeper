@@ -1,7 +1,7 @@
 //declarations
 
-const weeper = document.getElementById("weeper");
-const ctx = weeper.getContext("2d");
+const field = document.getElementById("field");
+const ctx = field.getContext("2d");
 const gameSize = 16;
 const cellSize = 50;
 const cellGap = 5;
@@ -214,11 +214,11 @@ class Mine {
   };
 }
 
-weeper.oncontextmenu = function () {
+field.oncontextmenu = function () {
   return false;
 };
 
-weeper.addEventListener("mousedown", (event) => {
+field.addEventListener("mousedown", (event) => {
   let mouseXPos = event.offsetX;
   let mouseYPos = event.offsetY;
   let x = Math.floor(mouseXPos / (cellSize + cellGap));
