@@ -21,6 +21,7 @@ Detect pipe bombs and remove them from the battlefield so yall can fight again.
 
 #### you left click to open up a cell
 #### you right click to flag a cell
+#### may have to zoom out a bit to play
 
 ![bumbastic](https://github.com/sorbTheGoobert/pipe-bomb-detecter/blob/main/assets/capluaeh.png?raw=true)
 this is a capluaeh, it will boom
